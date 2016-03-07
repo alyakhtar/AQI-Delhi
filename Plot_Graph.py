@@ -23,9 +23,9 @@ def data_2013():
         avg = add/24
         i += 1
         # if avg == 0.0:
-        # 	print "No Data", i
+        #   print "No Data", i
         # else:
-        # 	print round(avg,2),i
+        #   print round(avg,2),i
         main_avg.append(avg)
 
     # new1 = pd.DataFrame(main_avg)
@@ -55,9 +55,9 @@ def data_2014():
         i += 1
 
         # if avg == 0.0:
-        # 	print "No Data", i
+        #   print "No Data", i
         # else:
-        # 	print round(avg,2),i
+        #   print round(avg,2),i
         main_avg.append(avg)
 
     # new2 = pd.DataFrame(main_avg)
@@ -87,14 +87,15 @@ def data_2015():
         i += 1
 
         # if avg == 0.0:
-        # 	print "No Data", i
+        #   print "No Data", i
         # else:
-        # 	print round(avg,2),i
+        #   print round(avg,2),i
         main_avg.append(avg)
 
     # new3 = pd.DataFrame(main_avg)
     # new3.columns = ['2015']
     return main_avg
+
 
 def data_2016():
     i = 0
@@ -118,9 +119,9 @@ def data_2016():
         i += 1
 
         # if avg == 0.0:
-        # 	print "No Data", i
+        #   print "No Data", i
         # else:
-        # 	print round(avg,2),i
+        #   print round(avg,2),i
         main_avg.append(avg)
 
     # new3 = pd.DataFrame(main_avg)
@@ -133,7 +134,7 @@ if __name__ == "__main__":
     a = data_2013()
     b = data_2014()
     c = data_2015()
-    d = data_2016() 
+    d = data_2016()
     plt.plot(xrange(0, 365), a, label='2013')
     plt.plot(xrange(0, 364), b, label='2014')
     plt.plot(xrange(0, 365), c, label='2015')

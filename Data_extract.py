@@ -2,12 +2,12 @@ import requests
 import sys
 from bs4 import BeautifulSoup
 from tabulate import tabulate
-from Plot_Graph import data_2013,data_2014,data_2015
+from Plot_Graph import data_2013, data_2014, data_2015
 
 
-def met_data(month,year):    
+def met_data(month, year):
 
-    file = open('%i/%i.html' %(year,month), 'rb')
+    file = open('%i/%i.html' % (year, month), 'rb')
     plain_text = file.read()
 
     oneD = []
@@ -47,25 +47,24 @@ def met_data(month,year):
 
 
 if __name__ == "__main__":
-    
 
-    for year in xrange(2013,2016):
+    for year in xrange(2013, 2016):
         final = []
-        for month in xrange(1,13):
-            
-            a = met_data(month,year)
+        for month in xrange(1, 13):
+
+            a = met_data(month, year)
 
             final = final + a
-        
-        pm = getattr(sys.modules[__name__],'data_%s' %year)()
+
+        pm = getattr(sys.modules[__name__], 'data_%s' % year)()
 
         if len(pm) == 364:
-            pm.insert(364,'-')
-        
+            pm.insert(364, '-')
+
         for i in xrange(len(final)):
-            final[i].insert(0,i+1)
-            final[i].insert(9,pm[i])
+            final[i].insert(0, i+1)
+            final[i].insert(9, pm[i])
 
         print year
 
-        print tabulate(final, headers=['SNO','T','TM','Tm','SLP','H','VV','V','VM','PM 2.5'],tablefmt='fancy_grid')
+        print tabulate(final, headers=['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'], tablefmt='fancy_grid')
