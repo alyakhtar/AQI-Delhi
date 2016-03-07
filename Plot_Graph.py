@@ -13,7 +13,7 @@ def data_2013():
         for index, row in df.iterrows():
             data.append(row['PM2.5'])
         for pm in data:
-            if type(pm) is long or type(pm) is float:
+            if type(pm) is long or type(pm) is float or type(pm) is int:
                 var = pm
                 add = add + var
             elif type(pm) is str:
@@ -44,7 +44,7 @@ def data_2014():
         for index, row in df.iterrows():
             data.append(row['PM2.5'])
         for pm in data:
-            if type(pm) is long or type(pm) is float:
+            if type(pm) is long or type(pm) is float or type(pm) is int:
                 var = pm
                 add = add + var
             elif type(pm) is str:
@@ -76,7 +76,7 @@ def data_2015():
         for index, row in df.iterrows():
             data.append(row['PM2.5'])
         for pm in data:
-            if type(pm) is long or type(pm) is float:
+            if type(pm) is long or type(pm) is float or type(pm) is int:
                 var = pm
                 add = add + var
             elif type(pm) is str:
@@ -108,7 +108,7 @@ def data_2016():
         for index, row in df.iterrows():
             data.append(row['PM2.5'])
         for pm in data:
-            if type(pm) is long or type(pm) is float:
+            if type(pm) is long or type(pm) is float or type(pm) is int:
                 var = pm
                 add = add + var
             elif type(pm) is str:

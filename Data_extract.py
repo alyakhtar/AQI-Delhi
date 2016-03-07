@@ -1,3 +1,4 @@
+import csv
 import requests
 import sys
 from bs4 import BeautifulSoup
@@ -50,6 +51,9 @@ if __name__ == "__main__":
 
     for year in xrange(2013, 2016):
         final = []
+        with open('met_'+str(year)+'.csv', 'w') as csvfile:
+            wr = csv.writer(csvfile, dialect='excel')
+            wr.writerow(['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
         for month in xrange(1, 13):
 
             a = met_data(month, year)
@@ -65,6 +69,13 @@ if __name__ == "__main__":
             final[i].insert(0, i+1)
             final[i].insert(9, pm[i])
 
-        print year
 
-        print tabulate(final, headers=['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'], tablefmt='fancy_grid')
+        # print year
+
+        # print tabulate(final, headers=['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'], tablefmt='fancy_grid')
+        # break
+
+        with open('met_'+str(year)+'.csv', 'a') as csvfile:
+            wr = csv.writer(csvfile, dialect='excel')
+            wr.writerows(final)
+
