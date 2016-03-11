@@ -53,7 +53,7 @@ if __name__ == "__main__":
         final = []
         with open('met_'+str(year)+'.csv', 'w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
-            wr.writerow(['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
+            wr.writerow(['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5' , 'NORMALISED'])
         for month in xrange(1, 13):
 
             a = met_data(month, year)
@@ -69,6 +69,34 @@ if __name__ == "__main__":
             final[i].insert(0, i+1)
             final[i].insert(9, pm[i])
 
+        maxi = 0.0
+        for a in final:
+            if a[9] != '-':
+                if type(a[9]) is str:
+                    abc = float(a[9])
+                abc = a[9]
+                if abc > maxi:
+                    maxi = a[9]
+        mini = maxi
+        for a in final:
+            if a[9] != '-':
+                if type(a[9]) is str:
+                    abc = float(a[9])
+                abc = a[9]
+                if abc < mini:
+                    mini = a[9]
+       
+        i = 0
+        maxi = float(maxi)
+        mini = float(mini)
+        # print maxi, mini
+        for a in final:
+            if a[9] is '-':
+                y = '-'
+            else:
+                y = (((a[9] - mini) / (maxi - mini)) * 2) - 1
+            final[i].append(y)
+            i = i + 1
 
         # print year
 
