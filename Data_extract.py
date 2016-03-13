@@ -3,7 +3,7 @@ import requests
 import sys
 from bs4 import BeautifulSoup
 from tabulate import tabulate
-from Plot_Graph import data_2013, data_2014, data_2015
+from test import data_2013, data_2014, data_2015,data_2016
 
 
 def met_data(month, year):
@@ -49,16 +49,21 @@ def met_data(month, year):
 
 if __name__ == "__main__":
 
-    for year in xrange(2013, 2016):
+    for year in xrange(2013, 2017):
         final = []
         with open('met_'+str(year)+'.csv', 'w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             wr.writerow(['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5' , 'NORMALISED'])
         for month in xrange(1, 13):
-
-            a = met_data(month, year)
-
-            final = final + a
+            if year == 2016:
+                if month < 3:
+                    a = met_data(month, year)
+                    final = final + a
+                else:
+                    break
+            else:
+                a = met_data(month, year)
+                final = final + a
 
         pm = getattr(sys.modules[__name__], 'data_%s' % year)()
 
@@ -100,7 +105,8 @@ if __name__ == "__main__":
 
         # print year
 
-        # print tabulate(final, headers=['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'], tablefmt='fancy_grid')
+        # print tabulate(final, headers=['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5','Normalised'], tablefmt='fancy_grid')
+        # print year
         # break
 
         with open('met_'+str(year)+'.csv', 'a') as csvfile:
