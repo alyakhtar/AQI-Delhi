@@ -62,7 +62,7 @@
     <td>4</td>
   </tr>
   <tr>
-    <td>121-150</td>
+    <td>121-250</td>
     <td>Very Poor</td>
     <td>5</td>
   </tr>
