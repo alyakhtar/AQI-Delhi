@@ -1,6 +1,6 @@
 from sklearn.neighbors import KNeighborsRegressor, NearestNeighbors
 import pandas as pd
-from sklearn import metrics 
+from sklearn import metrics
 
 X = pd.read_csv('Train/Train_Combine.csv', usecols=[
                 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM'])
@@ -17,10 +17,11 @@ X2 = X2.values
 Y2 = Y2.values
 
 
-knn = KNeighborsRegressor(n_neighbors=10,algorithm='auto', leaf_size=30, weights='uniform')
+knn = KNeighborsRegressor(
+    n_neighbors=10, algorithm='auto', leaf_size=30, weights='uniform')
 knn.fit(X, Y)
-nn = NearestNeighbors(n_neighbors=10,algorithm='auto', leaf_size=30)
-nn.fit(X,Y)
+nn = NearestNeighbors(n_neighbors=10, algorithm='auto', leaf_size=30)
+nn.fit(X, Y)
 # KNeighborsRegressor(algorithm='auto', leaf_size=30, weights='uniform')
 
 
