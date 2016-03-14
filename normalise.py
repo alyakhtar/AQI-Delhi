@@ -2,6 +2,7 @@ import pandas as pd
 import csv
 from tabulate import tabulate
 
+
 def maximum(list):
     maxi = 0.0
     for a in list:
@@ -30,7 +31,8 @@ def minimum(list):
                 mini = a
     return mini
 
-def normalize_input(maxi,mini,list):
+
+def normalize_input(maxi, mini, list):
     mylist = []
     for a in list:
         if a is '-':
@@ -40,15 +42,16 @@ def normalize_input(maxi,mini,list):
         mylist.append(y)
     return mylist
 
-def normalize_output(PM):  
-    mylist = []  
+
+def normalize_output(PM):
+    mylist = []
     for poll in PM:
         if type(poll) is str:
             NewPoll = float(poll)
         else:
             NewPoll = poll
 
-        if NewPoll > 0 and NewPoll <=30:
+        if NewPoll > 0 and NewPoll <= 30:
             y = 1
         elif NewPoll > 30 and NewPoll <= 60:
             y = 2
@@ -56,22 +59,23 @@ def normalize_output(PM):
             y = 3
         elif NewPoll > 90 and NewPoll <= 120:
             y = 4
-        elif NewPoll > 120 and NewPoll <=250:
+        elif NewPoll > 120 and NewPoll <= 250:
             y = 5
-        else :
+        else:
             y = 6
         mylist.append(y)
     return mylist
 
 
 def normalization(year):
-    with open('met_normalised_'+str(year)+'.csv', 'w') as csvfile:
+    with open('Normalised-Data/met_normalised_'+str(year)+'.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
-        wr.writerow(['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
+        wr.writerow(
+            ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
     final = []
     Temp = []
     T = []
-    MaxTemp = [] 
+    MaxTemp = []
     TM = []
     MinTemp = []
     Tm = []
@@ -87,8 +91,8 @@ def normalization(year):
     VM = []
     PM = []
     PM2 = []
-    
-    for a in pd.read_csv('met_cleaned_'+str(year)+'.csv',chunksize = 1):
+
+    for a in pd.read_csv('Original-Data/met_'+str(year)+'.csv', chunksize=1):
         df = pd.DataFrame(data=a)
         for index, row in df.iterrows():
             PM.append(row['PM 2.5'])
@@ -101,14 +105,14 @@ def normalization(year):
             Visibility.append(row['VV'])
             MaxWind.append(row['VM'])
 
-    T = normalize_input(maximum(Temp),minimum(Temp),Temp)
-    TM = normalize_input(maximum(MaxTemp),minimum(MaxTemp),MaxTemp)
-    Tm = normalize_input(maximum(MinTemp),minimum(MinTemp),MinTemp)
-    Pr = normalize_input(maximum(SLP),minimum(SLP),SLP)
-    H = normalize_input(maximum(Humidity),minimum(Humidity),Humidity)
-    V = normalize_input(maximum(Wind),minimum(Wind),Wind)
-    VV = normalize_input(maximum(Visibility),minimum(Visibility),Visibility)
-    VM = normalize_input(maximum(MaxWind),minimum(MaxWind),MaxWind)
+    T = normalize_input(maximum(Temp), minimum(Temp), Temp)
+    TM = normalize_input(maximum(MaxTemp), minimum(MaxTemp), MaxTemp)
+    Tm = normalize_input(maximum(MinTemp), minimum(MinTemp), MinTemp)
+    Pr = normalize_input(maximum(SLP), minimum(SLP), SLP)
+    H = normalize_input(maximum(Humidity), minimum(Humidity), Humidity)
+    V = normalize_input(maximum(Wind), minimum(Wind), Wind)
+    VV = normalize_input(maximum(Visibility), minimum(Visibility), Visibility)
+    VM = normalize_input(maximum(MaxWind), minimum(MaxWind), MaxWind)
     PM2 = normalize_output(PM)
 
     TwoD = []
@@ -126,13 +130,15 @@ def normalization(year):
         oneD.append(PM2[a])
         TwoD.append(oneD)
 
-    with open('met_normalised_'+str(year)+'.csv', 'a') as csvfile:
-            wr = csv.writer(csvfile, dialect='excel')
-            wr.writerows(TwoD)
+    with open('Normalised-Data/met_normalised_'+str(year)+'.csv', 'a') as csvfile:
+        wr = csv.writer(csvfile, dialect='excel')
+        wr.writerows(TwoD)
 
-    # print tabulate(TwoD,headers=['S No','T','TM','Tm','SLP','H','V','VV','VM','PM 2.5'],tablefmt='fancy_grid')
+    # print tabulate(TwoD,headers=['S
+    # No','T','TM','Tm','SLP','H','V','VV','VM','PM
+    # 2.5'],tablefmt='fancy_grid')
 
 
 if __name__ == "__main__":
-    for year in xrange(2013,2017):
+    for year in xrange(2013, 2017):
         normalization(year)
