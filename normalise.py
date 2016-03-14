@@ -1,6 +1,5 @@
 import pandas as pd
 import csv
-from tabulate import tabulate
 
 
 def maximum(list):
@@ -113,7 +112,7 @@ def normalization(year):
     V = normalize_input(maximum(Wind), minimum(Wind), Wind)
     VV = normalize_input(maximum(Visibility), minimum(Visibility), Visibility)
     VM = normalize_input(maximum(MaxWind), minimum(MaxWind), MaxWind)
-    PM2 = normalize_output(PM)
+    PM2 = normalize_input(maximum(PM),minimum(PM),PM)
 
     TwoD = []
     for a in xrange(len(T)):
