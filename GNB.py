@@ -26,10 +26,12 @@ Y2 = Y2.values
 
 preds = lin.predict(X2)  # make prediction on X test set
 
-print preds[0], Y2[0]
+# print preds[0], Y2[0]
 # print preds
 
-print metrics.mean_absolute_error(Y2, preds)  # evaluate performance
+err = metrics.mean_absolute_error(Y2, preds) *100
+print ("Mean Absolute Error: %f" % err)  # evaluate performance
+print ("Accuracy: %f" % (100 - err))  # evaluate performance
 # print y
 # clf = GaussianNB()
 # clf.fit(X, y)

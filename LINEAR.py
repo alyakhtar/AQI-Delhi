@@ -26,7 +26,11 @@ nn.fit(X, Y)
 
 
 # for i in xrange(X2.shape[0]):
-print knn.predict(X2[0])[0], Y[0]
-print metrics.mean_absolute_error(Y2, knn.predict(X2))
+# print knn.predict(X2[0])[0], Y[0]
+# print metrics.mean_absolute_error(Y2, knn.predict(X2))
+
+err = metrics.mean_absolute_error(Y2, knn.predict(X2)) *100
+print ("Mean Absolute Error: %f" % err)  # evaluate performance
+print ("Accuracy: %f" % (100 - err))
 # print nn.kneighbors(X2[0])[0], Y[0]
 # break
