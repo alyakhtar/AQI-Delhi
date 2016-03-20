@@ -5,6 +5,7 @@ import pandas as pd
 import time,math
 import matplotlib.pyplot as plt
 from Confuse import main
+from sklearn.metrics import mean_absolute_error
 
 X = pd.read_csv('Train/Train_Combine.csv', usecols=[
                 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM'])
@@ -37,13 +38,13 @@ score = model.evaluate(X2, Y2, batch_size=1)
 preds = model.predict(X2, batch_size=1, verbose=0)
 
 
-main(preds,Y2)
+main(Y2,preds)
 
-plt.plot(xrange(0, 441), preds, label='Observed')
-plt.plot(xrange(0, 441), Y2, label='Expected')
-plt.xlabel('Data Points')
-plt.ylabel('PM 2.5')
-plt.legend(loc='upper right')
-plt.show()
+# plt.plot(xrange(0, 441), preds, label='Observed')
+# plt.plot(xrange(0, 441), Y2, label='Expected')
+# plt.xlabel('Data Points')
+# plt.ylabel('PM 2.5')
+# plt.legend(loc='upper right')
+# plt.show()
 
-print "Error: ",score
+print "Error: ",score*100

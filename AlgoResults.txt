@@ -1,0 +1,32 @@
+#Algo Accuracy and MSE
+
+[-]Decision Tree
+	* Accuracy - 74.6% 
+	* MSE - 16.1%
+
+[-]Random Forest Regression 
+	*Accuracy - 75.9
+	* MSE - 14.9
+
+[-]Support Vector Regression 
+	*Accuracy - 77.1
+	* MSE - 14.6
+
+[-]K Nearest Neighbour 
+	*Accuracy - 79.1
+	* MSE - 13.9
+
+[-]Linear Regression 
+	*Accuracy - 72.1
+	* MSE - 18.1
+
+
+[-]Random Forest Regression 
+	*Accuracy - 75.9
+	* MSE - 14.9
+
+
+[-]Multi Layer Perceptron 
+	*Accuracy - 77.7
+	* MSE - 4.6
+

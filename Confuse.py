@@ -8,7 +8,7 @@ def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.Blues):
     plt.title(title)
     plt.colorbar()
     tick_marks = np.arange(4)
-    plt.xticks(tick_marks, ['0', '1', '2' , '3'], rotation=45)
+    plt.xticks(tick_marks, ['0', '1', '2' , '3'])
     plt.yticks(tick_marks, ['0', '1', '2' , '3'])
     plt.tight_layout()
     plt.ylabel('Expected ')
@@ -16,7 +16,7 @@ def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.Blues):
     plt.show()
 
 
-def confuse(Observed,Expected):
+def confuse(Expected,Observed):
 	A_O = []
 	A_E = []
 
@@ -41,12 +41,12 @@ def confuse(Observed,Expected):
 		else:
 			A_E.append(3)
 
-	return confusion_matrix(A_E, A_O)
+	return confusion_matrix(A_E,A_O)
 
-def main(x,y):
+def main(true,pred):
 	sum = 0.0
-	a = confuse(x,y)
-	plot_confusion_matrix(a)
+	a = confuse(true,pred)
+	# plot_confusion_matrix(a)
 	for i in xrange(4):
 		for j in xrange(4): 
 			if i == j:
