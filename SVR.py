@@ -1,6 +1,6 @@
 from sklearn.svm import SVR
 import pandas as pd
-import numpy as np
+from sklearn import metrics
 from Confuse import main
 
 X = pd.read_csv('Train/Train_Combine.csv', usecols=[
