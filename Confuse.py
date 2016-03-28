@@ -1,4 +1,4 @@
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix,accuracy_score
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -40,7 +40,6 @@ def confuse(Expected,Observed):
 			A_E.append(2)
 		else:
 			A_E.append(3)
-
 	return confusion_matrix(A_E,A_O)
 
 def main(true,pred):
@@ -52,5 +51,5 @@ def main(true,pred):
 			if i == j:
 				sum += a[i][j]
 
-	print "Accuracy : ",(sum/441)*100
+	print "Accuracy : ",(sum/len(true))*100
 
