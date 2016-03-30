@@ -46,6 +46,12 @@ def met_data(month, year):
 
     return twoD
 
+def data_combine(year,cs):
+    for a in pd.read_csv('Original-Data/met_'+str(year)+'.csv', chunksize=cs):
+        df = pd.DataFrame(data=a)
+        mylist = df.values.tolist()
+    return mylist
+
 
 if __name__ == "__main__":
 
@@ -82,6 +88,18 @@ if __name__ == "__main__":
                 for elem in row:
                     if elem == 0 or elem == "-":
                         flag = 1
-                        print "Error", elem, row
+                        # print "Error", elem, row
                 if flag != 1:
                     wr.writerow(row)
+
+    a = data_combine(2013,600)
+    b = data_combine(2014,600)
+    c = data_combine(2015,600)
+    d = data_combine(2016,600)
+
+    total = a+b+c+d
+
+    with open('Original-Data/Original_Combine.csv', 'w') as csvfile:
+       wr = csv.writer(csvfile, dialect='excel')
+       wr.writerow(['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
+       wr.writerows(total)
