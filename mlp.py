@@ -1,8 +1,9 @@
-from keras.models import Sequential,Graph
+from keras.models import Sequential, Graph
 from keras.layers import Dense, Dropout, Activation
 from keras.optimizers import SGD
 import pandas as pd
-import time,math
+import time
+import math
 import matplotlib.pyplot as plt
 from Confuse import main
 from sklearn.metrics import mean_absolute_error
@@ -25,20 +26,20 @@ model = Sequential()
 
 model.add(Dense(10, input_dim=8, init='uniform'))
 model.add(Activation('tanh'))
-model.add(Dense(10,input_dim=10, init='uniform'))
+model.add(Dense(10, input_dim=10, init='uniform'))
 model.add(Activation('tanh'))
-model.add(Dense(1,input_dim=10, init='uniform'))
+model.add(Dense(1, input_dim=10, init='uniform'))
 model.add(Activation('tanh'))
 
 sgd = SGD(lr=0.1, decay=1e-3, momentum=0.5, nesterov=True)
-model.compile(loss='mse',optimizer=sgd)
+model.compile(loss='mse', optimizer=sgd)
 
-model.fit(X, Y,nb_epoch=20,batch_size=1,show_accuracy=False)
+model.fit(X, Y, nb_epoch=20, batch_size=1, show_accuracy=False)
 score = model.evaluate(X2, Y2, batch_size=1)
 preds = model.predict(X2, batch_size=1, verbose=0)
 
 
-main(Y2,preds)
+main(Y2, preds)
 
 # plt.plot(xrange(0, 441), preds, label='Observed')
 # plt.plot(xrange(0, 441), Y2, label='Expected')
@@ -47,4 +48,4 @@ main(Y2,preds)
 # plt.legend(loc='upper right')
 # plt.show()
 
-print "Error: ",score*100
+print "Error: ", score * 100

@@ -21,7 +21,7 @@ def met_data(month, year):
                 a = tr.get_text()
                 oneD.append(a)
 
-    rows = len(oneD)/15
+    rows = len(oneD) / 15
 
     for times in xrange(rows):
         newoneD = []
@@ -32,7 +32,7 @@ def met_data(month, year):
 
     length = len(twoD)
 
-    twoD.pop(length-1)
+    twoD.pop(length - 1)
     twoD.pop(0)
 
     for a in xrange(len(twoD)):
@@ -46,8 +46,9 @@ def met_data(month, year):
 
     return twoD
 
-def data_combine(year,cs):
-    for a in pd.read_csv('Original-Data/met_'+str(year)+'.csv', chunksize=cs):
+
+def data_combine(year, cs):
+    for a in pd.read_csv('Original-Data/met_' + str(year) + '.csv', chunksize=cs):
         df = pd.DataFrame(data=a)
         mylist = df.values.tolist()
     return mylist
@@ -57,7 +58,7 @@ if __name__ == "__main__":
 
     for year in xrange(2013, 2017):
         final = []
-        with open('met_'+str(year)+'.csv', 'w') as csvfile:
+        with open('met_' + str(year) + '.csv', 'w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             wr.writerow(
                 ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
@@ -78,10 +79,10 @@ if __name__ == "__main__":
             pm.insert(364, '-')
 
         for i in xrange(len(final)):
-            final[i].insert(0, i+1)
+            final[i].insert(0, i + 1)
             final[i].insert(9, pm[i])
 
-        with open('met_'+str(year)+'.csv', 'a') as csvfile:
+        with open('met_' + str(year) + '.csv', 'a') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             for row in final:
                 flag = 0
@@ -92,14 +93,15 @@ if __name__ == "__main__":
                 if flag != 1:
                     wr.writerow(row)
 
-    a = data_combine(2013,600)
-    b = data_combine(2014,600)
-    c = data_combine(2015,600)
-    d = data_combine(2016,600)
+    a = data_combine(2013, 600)
+    b = data_combine(2014, 600)
+    c = data_combine(2015, 600)
+    d = data_combine(2016, 600)
 
-    total = a+b+c+d
+    total = a + b + c + d
 
     with open('Original-Data/Original_Combine.csv', 'w') as csvfile:
-       wr = csv.writer(csvfile, dialect='excel')
-       wr.writerow(['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
-       wr.writerows(total)
+        wr = csv.writer(csvfile, dialect='excel')
+        wr.writerow(
+            ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
+        wr.writerows(total)

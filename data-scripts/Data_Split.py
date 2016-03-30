@@ -29,6 +29,7 @@ def split_combine():
             ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
         wr.writerows(mylist_test)
 
+
 def split(year):
     mylist = []
     if year == 2013:
@@ -40,7 +41,7 @@ def split(year):
     else:
         cs = 59
 
-    for a in pd.read_csv('Normalised-Data/met_normalised_'+str(year)+'.csv', chunksize=cs):
+    for a in pd.read_csv('Normalised-Data/met_normalised_' + str(year) + '.csv', chunksize=cs):
         df = pd.DataFrame(data=a)
         mylist = df.values.tolist()
 
@@ -52,30 +53,31 @@ def split(year):
     if not os.path.exists("Test"):
         os.makedirs("Test")
 
-    with open('Train/Train_'+str(year)+'.csv', 'w') as csvfile:
+    with open('Train/Train_' + str(year) + '.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
             ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
         wr.writerows(mylist_train)
 
-    with open('Test/Test_'+str(year)+'.csv', 'w') as csvfile:
+    with open('Test/Test_' + str(year) + '.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
             ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
         wr.writerows(mylist_test)
 
-def combine_train(year,cs):
-	for a in pd.read_csv('Train/Train_'+str(year)+'.csv', chunksize=cs):
-		df = pd.DataFrame(data=a)
-        mylist = df.values.tolist()
-	return mylist
 
-def combine_test(year,cs):
-	for a in pd.read_csv('Test/Test_'+str(year)+'.csv', chunksize=cs):
-		df = pd.DataFrame(data=a)
-        mylist = df.values.tolist()
-	return mylist
+def combine_train(year, cs):
+    for a in pd.read_csv('Train/Train_' + str(year) + '.csv', chunksize=cs):
+        df = pd.DataFrame(data=a)
+    mylist = df.values.tolist()
+    return mylist
 
+
+def combine_test(year, cs):
+    for a in pd.read_csv('Test/Test_' + str(year) + '.csv', chunksize=cs):
+        df = pd.DataFrame(data=a)
+    mylist = df.values.tolist()
+    return mylist
 
 
 if __name__ == "__main__":
@@ -94,7 +96,6 @@ if __name__ == "__main__":
     #     wr = csv.writer(csvfile, dialect='excel')
     #     wr.writerow(['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
     #     wr.writerows(final_train)
-
 
     # a = combine_test(2013,343)
     # b = combine_test(2014,346)

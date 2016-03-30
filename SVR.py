@@ -20,6 +20,6 @@ Y2 = Y2.values
 abc = SVR(kernel='rbf')
 abc.fit(X, Y)
 
-err = metrics.mean_absolute_error(Y2, abc.predict(X2)) *100
+err = metrics.mean_absolute_error(Y2, abc.predict(X2)) * 100
 print ("Mean Absolute Error: %f" % err)  # evaluate performance
-main(Y2,abc.predict(X2))
+main(Y2, abc.predict(X2))

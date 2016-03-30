@@ -40,7 +40,7 @@ def fetch():
                 done = 98
 
             sys.stdout.write("\r[%s%s] %d%% Completed" %
-                             ('=' * i, ' ' * (38-i), done))
+                             ('=' * i, ' ' * (38 - i), done))
             done = done + 2.63
             i += 1
 
@@ -51,7 +51,7 @@ if __name__ == "__main__":
     start = time.time()
     fetch()
     end = time.time()
-    print '\nTime Taken : ', end-start, 'seconds'
+    print '\nTime Taken : ', end - start, 'seconds'
 
 # with open('test.csv', 'wb') as fp:
 #     a = csv.writer(fp, delimiter=',')

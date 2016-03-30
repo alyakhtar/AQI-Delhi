@@ -22,24 +22,19 @@ epochs = 600
 input_size = X.shape[1]
 target_size = Y.shape[1]
 
-ds = SDS( input_size, target_size )
-ds.setField( 'input', X )
-ds.setField( 'target', Y )
+ds = SDS(input_size, target_size)
+ds.setField('input', X)
+ds.setField('target', Y)
 
-net = buildNetwork( input_size, hidden_size, target_size, bias = True, hiddenclass=TanhLayer)
-trainer = BackpropTrainer( net,ds )
+net = buildNetwork(
+    input_size, hidden_size, target_size, bias=True, hiddenclass=TanhLayer)
+trainer = BackpropTrainer(net, ds)
 
-print "training for {} epochs...".format( epochs )
+print "training for {} epochs...".format(epochs)
 
-for i in range( epochs ):
-	mse = trainer.train()
-	rmse = sqrt( mse )
-	print "training RMSE, epoch {}: {}".format( i + 1, rmse )
-	
-pickle.dump( net, open( output_model_file, 'wb' ))
+for i in range(epochs):
+    mse = trainer.train()
+    rmse = sqrt(mse)
+    print "training RMSE, epoch {}: {}".format(i + 1, rmse)
 
-
-
-
-
-
+pickle.dump(net, open(output_model_file, 'wb'))

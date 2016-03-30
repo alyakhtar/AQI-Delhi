@@ -24,6 +24,6 @@ knn.fit(X, Y)
 nn = NearestNeighbors(n_neighbors=10, algorithm='auto', leaf_size=30)
 nn.fit(X, Y)
 
-err = metrics.mean_absolute_error(Y2, knn.predict(X2)) *100
-print ("Mean Absolute Error: %f" % err) 
-main(Y2,knn.predict(X2))
+err = metrics.mean_absolute_error(Y2, knn.predict(X2)) * 100
+print ("Mean Absolute Error: %f" % err)
+main(Y2, knn.predict(X2))

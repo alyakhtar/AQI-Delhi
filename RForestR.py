@@ -21,6 +21,6 @@ Y2 = Y2.values
 abc = RandomForestRegressor(n_estimators=10)
 abc.fit(X, Y)
 
-err = metrics.mean_absolute_error(Y2, abc.predict(X2)) *100
-print ("Mean Absolute Error: %f" % err) 
-main(Y2,abc.predict(X2))
+err = metrics.mean_absolute_error(Y2, abc.predict(X2)) * 100
+print ("Mean Absolute Error: %f" % err)
+main(Y2, abc.predict(X2))
