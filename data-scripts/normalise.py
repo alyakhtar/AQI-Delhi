@@ -137,7 +137,76 @@ def normalization(year):
     # No','T','TM','Tm','SLP','H','V','VV','VM','PM
     # 2.5'],tablefmt='fancy_grid')
 
+def normalization_combine():
+    with open('Normalised-Data/met_normalised_combine.csv', 'w') as csvfile:
+        wr = csv.writer(csvfile, dialect='excel')
+        wr.writerow(
+            ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
+    final = []
+    Temp = []
+    T = []
+    MaxTemp = []
+    TM = []
+    MinTemp = []
+    Tm = []
+    SLP = []
+    Pr = []
+    Humidity = []
+    H = []
+    Visibility = []
+    VV = []
+    Wind = []
+    V = []
+    MaxWind = []
+    VM = []
+    PM = []
+    PM2 = []
+
+    for a in pd.read_csv('Original-Data/Original_Combine.csv', chunksize=1):
+        df = pd.DataFrame(data=a)
+        for index, row in df.iterrows():
+            PM.append(row['PM 2.5'])
+            Temp.append(row['T'])
+            MaxTemp.append(row['TM'])
+            MinTemp.append(row['Tm'])
+            SLP.append(row['SLP'])
+            Humidity.append(row['H'])
+            Wind.append(row['V'])
+            Visibility.append(row['VV'])
+            MaxWind.append(row['VM'])
+
+    T = normalize_input(maximum(Temp), minimum(Temp), Temp)
+    TM = normalize_input(maximum(MaxTemp), minimum(MaxTemp), MaxTemp)
+    Tm = normalize_input(maximum(MinTemp), minimum(MinTemp), MinTemp)
+    Pr = normalize_input(maximum(SLP), minimum(SLP), SLP)
+    H = normalize_input(maximum(Humidity), minimum(Humidity), Humidity)
+    V = normalize_input(maximum(Wind), minimum(Wind), Wind)
+    VV = normalize_input(maximum(Visibility), minimum(Visibility), Visibility)
+    VM = normalize_input(maximum(MaxWind), minimum(MaxWind), MaxWind)
+    PM2 = normalize_input(maximum(PM),minimum(PM),PM)
+
+    TwoD = []
+    for a in xrange(len(T)):
+        oneD = []
+        oneD.append(a+1)
+        oneD.append(T[a])
+        oneD.append(TM[a])
+        oneD.append(Tm[a])
+        oneD.append(Pr[a])
+        oneD.append(H[a])
+        oneD.append(VV[a])
+        oneD.append(V[a])
+        oneD.append(VM[a])
+        oneD.append(PM2[a])
+        TwoD.append(oneD)
+
+    with open('Normalised-Data/met_normalised_combine.csv', 'a') as csvfile:
+        wr = csv.writer(csvfile, dialect='excel')
+        wr.writerows(TwoD)
+
+
 
 if __name__ == "__main__":
     for year in xrange(2013, 2017):
         normalization(year)
+    normalization_combine()

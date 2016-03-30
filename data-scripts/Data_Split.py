@@ -45,7 +45,7 @@ def split(year):
         mylist = df.values.tolist()
 
     mylist_train, mylist_test = train_test_split(
-        mylist, test_size=0.1)
+        mylist, test_size=0.3)
 
     if not os.path.exists("Train"):
         os.makedirs("Train")
