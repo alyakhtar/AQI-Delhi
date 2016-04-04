@@ -10,7 +10,7 @@ def split_combine():
         mylist = df.values.tolist()
 
     mylist_train, mylist_test = train_test_split(
-        mylist, test_size=0.4)
+        mylist, test_size=0.2)
 
     if not os.path.exists("Train"):
         os.makedirs("Train")
