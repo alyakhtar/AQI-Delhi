@@ -9,8 +9,23 @@ def split_combine():
         df = pd.DataFrame(data=a)
         mylist = df.values.tolist()
 
+    mylist_a = []
+    mylist_b = []
+
+    for i in xrange(len(mylist)):
+        if mylist[i][9] > 0.5:
+            mylist_a.append(mylist[i])
+        else:
+            mylist_b.append(mylist[i])
+
     mylist_train, mylist_test = train_test_split(
-        mylist, test_size=0.2)
+        mylist_b, test_size=0.2)
+
+    for i in xrange(0,8,2):
+        mylist_train.append(mylist_a[i])
+
+    for j in xrange(1,8,2):
+        mylist_test.append(mylist_a[j])
 
     if not os.path.exists("Train"):
         os.makedirs("Train")
@@ -81,8 +96,8 @@ def combine_test(year, cs):
 
 
 if __name__ == "__main__":
-    for year in xrange(2013, 2017):
-        split(year)
+    # for year in xrange(2013, 2017):
+    #     split(year)
 
     split_combine()
 

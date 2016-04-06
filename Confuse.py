@@ -1,7 +1,6 @@
-from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score
 import matplotlib.pyplot as plt
 import numpy as np
-
 
 def plot_confusion_matrix(cm, title='Confusion matrix', cmap=plt.cm.Blues):
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
@@ -39,6 +38,10 @@ def confuse(Expected, Observed):
             A_E.append(2)
         else:
             A_E.append(3)
+
+    print "Precision : ", precision_score(A_E,A_O, average=None)*100 
+    print "Recall : ", recall_score(A_E,A_O, average=None) * 100
+
     return confusion_matrix(A_E, A_O)
 
 
