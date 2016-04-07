@@ -51,17 +51,17 @@ def normalize_output(PM):
             NewPoll = poll
 
         if NewPoll > 0 and NewPoll <= 30:
-            y = 1
+            y = 0
         elif NewPoll > 30 and NewPoll <= 60:
-            y = 2
+            y = 1
         elif NewPoll > 60 and NewPoll <= 90:
-            y = 3
+            y = 2
         elif NewPoll > 90 and NewPoll <= 120:
-            y = 4
+            y = 3
         elif NewPoll > 120 and NewPoll <= 250:
-            y = 5
+            y = 4
         else:
-            y = 6
+            y = 5
         mylist.append(y)
     return mylist
 
@@ -183,7 +183,9 @@ def normalization_combine():
     V = normalize_input(maximum(Wind), minimum(Wind), Wind)
     VV = normalize_input(maximum(Visibility), minimum(Visibility), Visibility)
     VM = normalize_input(maximum(MaxWind), minimum(MaxWind), MaxWind)
-    PM2 = normalize_input(maximum(PM),minimum(PM),PM)
+    # PM2 = normalize_input(maximum(PM),minimum(PM),PM)
+    PM2 = normalize_output(PM)
+
 
     TwoD = []
     for a in xrange(len(T)):
@@ -207,6 +209,6 @@ def normalization_combine():
 
 
 if __name__ == "__main__":
-    for year in xrange(2013, 2017):
-        normalization(year)
+    # for year in xrange(2013, 2017):
+    #     normalization(year)
     normalization_combine()

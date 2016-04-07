@@ -9,23 +9,42 @@ def split_combine():
         df = pd.DataFrame(data=a)
         mylist = df.values.tolist()
 
-    mylist_a = []
-    mylist_b = []
+    # mylist_a = []
+    # mylist_b = []
+    # mylist_c = []
+    # mylist_d = []
+    # mylist_e = []
+    # mylist_f = []
 
-    for i in xrange(len(mylist)):
-        if mylist[i][9] > 0.5:
-            mylist_a.append(mylist[i])
-        else:
-            mylist_b.append(mylist[i])
+    # for i in xrange(len(mylist)):
+    #     if mylist[i][9] == 1:
+    #         mylist_a.append(mylist[i])
+    #     elif mylist[i][9] == 2:
+    #         mylist_b.append(mylist[i])
+    #     elif mylist[i][9] == 3:
+    #         mylist_c.append(mylist[i])
+    #     elif mylist[i][9] == 4:
+    #         mylist_d.append(mylist[i])
+    #     elif mylist[i][9] == 5:
+    #         mylist_e.append(mylist[i])
+    #     elif mylist[i][9] == 6:
+    #         mylist_f.append(mylist[i])
+
+    # print len(mylist_a)
+    # print len(mylist_b)
+    # print len(mylist_c)
+    # print len(mylist_d)
+    # print len(mylist_e)
+    # print len(mylist_f)
 
     mylist_train, mylist_test = train_test_split(
-        mylist_b, test_size=0.2)
+        mylist, test_size=0.2)
 
-    for i in xrange(0,8,2):
-        mylist_train.append(mylist_a[i])
+    # for i in xrange(0,8,2):
+    #     mylist_train.append(mylist_a[i])
 
-    for j in xrange(1,8,2):
-        mylist_test.append(mylist_a[j])
+    # for j in xrange(1,8,2):
+    #     mylist_test.append(mylist_a[j])
 
     if not os.path.exists("Train"):
         os.makedirs("Train")
