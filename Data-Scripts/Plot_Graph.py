@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 def data_2013():
     i = 0
     main_avg = []
-    for a in pd.read_csv('PM2.5/aqm2013.csv', chunksize=24):
+    for a in pd.read_csv('../Data/PM2.5/aqm2013.csv', chunksize=24):
         add = 0
         avg = 0.0
         data = []
@@ -36,7 +36,7 @@ def data_2013():
 def data_2014():
     i = 0
     main_avg = []
-    for a in pd.read_csv('PM2.5/aqm2014.csv', chunksize=24):
+    for a in pd.read_csv('../Data/PM2.5/aqm2014.csv', chunksize=24):
         add = 0
         avg = 0.0
         data = []
@@ -68,7 +68,7 @@ def data_2014():
 def data_2015():
     i = 0
     main_avg = []
-    for a in pd.read_csv('PM2.5/aqm2015.csv', chunksize=24):
+    for a in pd.read_csv('../Data/PM2.5/aqm2015.csv', chunksize=24):
         add = 0
         avg = 0.0
         data = []
@@ -100,7 +100,7 @@ def data_2015():
 def data_2016():
     i = 0
     main_avg = []
-    for a in pd.read_csv('PM2.5/aqm2016.csv', chunksize=24):
+    for a in pd.read_csv('../Data/PM2.5/aqm2016.csv', chunksize=24):
         add = 0
         avg = 0.0
         data = []

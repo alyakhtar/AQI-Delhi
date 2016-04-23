@@ -28,18 +28,18 @@ def fetch():
 
             plain_text = source_code.text.encode('utf-8')
 
-            if not os.path.exists("%i" % year):
-                os.makedirs("%i" % year)
+            if not os.path.exists("../Data/Met-Data/%i" % year):
+                os.makedirs("../Data/Met-Data/%i" % year)
 
-            with open("%i/%i.html" % (year, month), "w") as output_file:
+            with open("../Data/Met-Data/%i/%i.html" % (year, month), "w") as output_file:
                 output_file.write(plain_text)
 
-            if i == 37:
-                done = 98
+            if i == 40:
+                done = 100
 
             sys.stdout.write("\r[%s%s] %d%% Completed" %
-                             ('=' * i, ' ' * (38 - i), done))
-            done = done + 2.63
+                             ('=' * i, ' ' * (40 - i), done))
+            done = done + 2.5
             i += 1
 
             sys.stdout.flush()
@@ -50,8 +50,3 @@ if __name__ == "__main__":
     fetch()
     end = time.time()
     print '\nTime Taken : ', end - start, 'seconds'
-
-# with open('test.csv', 'wb') as fp:
-#     a = csv.writer(fp, delimiter=',')
-#     data = []
-#     a.writerows(data)

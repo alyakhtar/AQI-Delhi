@@ -2,13 +2,13 @@ import csv
 import requests
 import sys
 from bs4 import BeautifulSoup
-from tabulate import tabulate
+import pandas as pd
 from Plot_Graph import data_2013, data_2014, data_2015, data_2016
 
 
 def met_data(month, year):
 
-    file = open('%i/%i.html' % (year, month), 'rb')
+    file = open('../Data/Met-Data/%i/%i.html' % (year, month), 'rb')
     plain_text = file.read()
 
     oneD = []
@@ -48,23 +48,22 @@ def met_data(month, year):
 
 
 def data_combine(year, cs):
-    for a in pd.read_csv('Original-Data/met_' + str(year) + '.csv', chunksize=cs):
+    for a in pd.read_csv('../Data/Original-Data/met_' + str(year) + '.csv', chunksize=cs):
         df = pd.DataFrame(data=a)
         mylist = df.values.tolist()
     return mylist
 
 
 if __name__ == "__main__":
-
     for year in xrange(2013, 2017):
         final = []
-        with open('met_' + str(year) + '.csv', 'w') as csvfile:
+        with open('../Data/Original-Data/met_' + str(year) + '.csv', 'w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             wr.writerow(
                 ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
         for month in xrange(1, 13):
             if year == 2016:
-                if month < 3:
+                if month < 4:
                     a = met_data(month, year)
                     final = final + a
                 else:
@@ -82,14 +81,13 @@ if __name__ == "__main__":
             final[i].insert(0, i + 1)
             final[i].insert(9, pm[i])
 
-        with open('met_' + str(year) + '.csv', 'a') as csvfile:
+        with open('../Data/Original-Data/met_' + str(year) + '.csv', 'a') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             for row in final:
                 flag = 0
                 for elem in row:
                     if elem == 0 or elem == "-":
                         flag = 1
-                        # print "Error", elem, row
                 if flag != 1:
                     wr.writerow(row)
 
@@ -100,7 +98,7 @@ if __name__ == "__main__":
 
     total = a + b + c + d
 
-    with open('Original-Data/Original_Combine.csv', 'w') as csvfile:
+    with open('../Data/Original-Data/Original_Combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
             ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])

@@ -51,23 +51,23 @@ def normalize_output(PM):
             NewPoll = poll
 
         if NewPoll > 0 and NewPoll <= 30:
-            y = 0
-        elif NewPoll > 30 and NewPoll <= 60:
             y = 1
-        elif NewPoll > 60 and NewPoll <= 90:
+        elif NewPoll > 30 and NewPoll <= 60:
             y = 2
-        elif NewPoll > 90 and NewPoll <= 120:
+        elif NewPoll > 60 and NewPoll <= 90:
             y = 3
-        elif NewPoll > 120 and NewPoll <= 250:
+        elif NewPoll > 90 and NewPoll <= 120:
             y = 4
-        else:
+        elif NewPoll > 120 and NewPoll <= 250:
             y = 5
+        else:
+            y = 6
         mylist.append(y)
     return mylist
 
 
 def normalization(year):
-    with open('Normalised-Data/met_normalised_'+str(year)+'.csv', 'w') as csvfile:
+    with open('../Data/Normalised-Data/met_normalised_'+str(year)+'.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
             ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
@@ -91,7 +91,7 @@ def normalization(year):
     PM = []
     PM2 = []
 
-    for a in pd.read_csv('Original-Data/met_'+str(year)+'.csv', chunksize=1):
+    for a in pd.read_csv('../Data/Original-Data/met_'+str(year)+'.csv', chunksize=1):
         df = pd.DataFrame(data=a)
         for index, row in df.iterrows():
             PM.append(row['PM 2.5'])
@@ -129,7 +129,7 @@ def normalization(year):
         oneD.append(PM2[a])
         TwoD.append(oneD)
 
-    with open('Normalised-Data/met_normalised_'+str(year)+'.csv', 'a') as csvfile:
+    with open('../Data/Normalised-Data/met_normalised_'+str(year)+'.csv', 'a') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerows(TwoD)
 
@@ -138,7 +138,7 @@ def normalization(year):
     # 2.5'],tablefmt='fancy_grid')
 
 def normalization_combine():
-    with open('Normalised-Data/met_normalised_combine.csv', 'w') as csvfile:
+    with open('../Data/Normalised-Data/met_normalised_combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
             ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
@@ -162,7 +162,7 @@ def normalization_combine():
     PM = []
     PM2 = []
 
-    for a in pd.read_csv('Original-Data/Original_Combine.csv', chunksize=1):
+    for a in pd.read_csv('../Data/Original-Data/Original_Combine.csv', chunksize=1):
         df = pd.DataFrame(data=a)
         for index, row in df.iterrows():
             PM.append(row['PM 2.5'])
@@ -183,9 +183,7 @@ def normalization_combine():
     V = normalize_input(maximum(Wind), minimum(Wind), Wind)
     VV = normalize_input(maximum(Visibility), minimum(Visibility), Visibility)
     VM = normalize_input(maximum(MaxWind), minimum(MaxWind), MaxWind)
-    # PM2 = normalize_input(maximum(PM),minimum(PM),PM)
-    PM2 = normalize_output(PM)
-
+    PM2 = normalize_input(maximum(PM),minimum(PM),PM)
 
     TwoD = []
     for a in xrange(len(T)):
@@ -202,13 +200,13 @@ def normalization_combine():
         oneD.append(PM2[a])
         TwoD.append(oneD)
 
-    with open('Normalised-Data/met_normalised_combine.csv', 'a') as csvfile:
+    with open('../Data/Normalised-Data/met_normalised_combine.csv', 'a') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerows(TwoD)
 
 
 
 if __name__ == "__main__":
-    # for year in xrange(2013, 2017):
-    #     normalization(year)
+    for year in xrange(2013, 2017):
+        normalization(year)
     normalization_combine()
