@@ -5,37 +5,15 @@ import pandas as pd
 
 
 def split_combine():
-    for a in pd.read_csv('Normalised-Data/met_normalised_combine.csv', chunksize=1100):
+    for a in pd.read_csv('../Data/Normalised-Data/met_normalised_combine.csv', chunksize=1200):
         df = pd.DataFrame(data=a)
         mylist = df.values.tolist()
 
     # mylist_a = []
-    # mylist_b = []
-    # mylist_c = []
-    # mylist_d = []
-    # mylist_e = []
-    # mylist_f = []
 
     # for i in xrange(len(mylist)):
-    #     if mylist[i][9] == 1:
+    #     if mylist[i][9] >= 0.5 :
     #         mylist_a.append(mylist[i])
-    #     elif mylist[i][9] == 2:
-    #         mylist_b.append(mylist[i])
-    #     elif mylist[i][9] == 3:
-    #         mylist_c.append(mylist[i])
-    #     elif mylist[i][9] == 4:
-    #         mylist_d.append(mylist[i])
-    #     elif mylist[i][9] == 5:
-    #         mylist_e.append(mylist[i])
-    #     elif mylist[i][9] == 6:
-    #         mylist_f.append(mylist[i])
-
-    # print len(mylist_a)
-    # print len(mylist_b)
-    # print len(mylist_c)
-    # print len(mylist_d)
-    # print len(mylist_e)
-    # print len(mylist_f)
 
     mylist_train, mylist_test = train_test_split(
         mylist, test_size=0.2)
@@ -46,18 +24,20 @@ def split_combine():
     # for j in xrange(1,8,2):
     #     mylist_test.append(mylist_a[j])
 
-    if not os.path.exists("Train"):
-        os.makedirs("Train")
-    if not os.path.exists("Test"):
-        os.makedirs("Test")
+    # print len(mylist_train)
 
-    with open('Train/Train_Combine.csv', 'w') as csvfile:
+    if not os.path.exists("../Data/Train"):
+        os.makedirs("../Data/Train")
+    if not os.path.exists("../Data/Test"):
+        os.makedirs("../Data/Test")
+
+    with open('../Data/Train/Train_Combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
             ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
         wr.writerows(mylist_train)
 
-    with open('Test/Test_Combine.csv', 'w') as csvfile:
+    with open('../Data/Test/Test_Combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
             ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
@@ -75,25 +55,25 @@ def split(year):
     else:
         cs = 59
 
-    for a in pd.read_csv('Normalised-Data/met_normalised_' + str(year) + '.csv', chunksize=cs):
+    for a in pd.read_csv('../Data/Normalised-Data/met_normalised_' + str(year) + '.csv', chunksize=cs):
         df = pd.DataFrame(data=a)
         mylist = df.values.tolist()
 
     mylist_train, mylist_test = train_test_split(
         mylist, test_size=0.3)
 
-    if not os.path.exists("Train"):
-        os.makedirs("Train")
-    if not os.path.exists("Test"):
-        os.makedirs("Test")
+    if not os.path.exists("../Data/Train"):
+        os.makedirs("../Data/Train")
+    if not os.path.exists("../Data/Test"):
+        os.makedirs("../Data/Test")
 
-    with open('Train/Train_' + str(year) + '.csv', 'w') as csvfile:
+    with open('../Data/Train/Train_' + str(year) + '.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
             ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
         wr.writerows(mylist_train)
 
-    with open('Test/Test_' + str(year) + '.csv', 'w') as csvfile:
+    with open('../Data/Test/Test_' + str(year) + '.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
             ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])

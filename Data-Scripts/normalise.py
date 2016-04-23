@@ -65,6 +65,21 @@ def normalize_output(PM):
         mylist.append(y)
     return mylist
 
+def normalize_output_binary(PM):
+    mylist = []
+    for poll in PM:
+        if type(poll) is str:
+            NewPoll = float(poll)
+        else:
+            NewPoll = poll
+
+        if NewPoll <= 90:
+            y = 0
+        else:
+            y = 1
+        mylist.append(y)
+    return mylist
+
 
 def normalization(year):
     with open('../Data/Normalised-Data/met_normalised_'+str(year)+'.csv', 'w') as csvfile:
@@ -183,7 +198,8 @@ def normalization_combine():
     V = normalize_input(maximum(Wind), minimum(Wind), Wind)
     VV = normalize_input(maximum(Visibility), minimum(Visibility), Visibility)
     VM = normalize_input(maximum(MaxWind), minimum(MaxWind), MaxWind)
-    PM2 = normalize_input(maximum(PM),minimum(PM),PM)
+    # PM2 = normalize_input(maximum(PM),minimum(PM),PM)
+    PM2 = normalize_output_binary(PM)
 
     TwoD = []
     for a in xrange(len(T)):

@@ -19,38 +19,45 @@ def confuse(Expected, Observed):
     A_O = []
     A_E = []
 
+    # for i in Observed:
+    #     if i >= -1.0 and i < -0.5:
+    #         A_O.append(0)
+    #     elif i >= -0.5 and i < 0:
+    #         A_O.append(1)
+    #     elif i >= 0 and i < 0.5:
+    #         A_O.append(2)
+    #     else:
+    #         A_O.append(3)
+
+    # for i in Expected:
+    #     if i >= -1.0 and i < -0.5:
+    #         A_E.append(0)
+    #     elif i >= -0.5 and i < 0:
+    #         A_E.append(1)
+    #     elif i >= 0 and i < 0.5:
+    #         A_E.append(2)
+    #     else:
+    #         A_E.append(3)
+
     for i in Observed:
-        if i >= -1.0 and i < -0.5:
+        if i[0] > i[1]:
             A_O.append(0)
-        elif i >= -0.5 and i < 0:
+        else:
             A_O.append(1)
-        elif i >= 0 and i < 0.5:
-            A_O.append(2)
-        else:
-            A_O.append(3)
 
-    for i in Expected:
-        if i >= -1.0 and i < -0.5:
-            A_E.append(0)
-        elif i >= -0.5 and i < 0:
-            A_E.append(1)
-        elif i >= 0 and i < 0.5:
-            A_E.append(2)
-        else:
-            A_E.append(3)
+    print "Precision : ", precision_score(Expected,A_O, average=None)
+    print "Recall : ", recall_score(Expected,A_O, average=None)
 
-    print "Precision : ", precision_score(A_E,A_O, average=None)*100 
-    print "Recall : ", recall_score(A_E,A_O, average=None) * 100
-
-    return confusion_matrix(A_E, A_O)
+    return confusion_matrix(Expected, A_O)
 
 
 def main(true, pred):
     sum = 0.0
     a = confuse(true, pred)
+    print a
     # plot_confusion_matrix(a)
-    for i in xrange(4):
-        for j in xrange(4):
+    for i in xrange(len(a)):
+        for j in xrange(len(a)):
             if i == j:
                 sum += a[i][j]
 
