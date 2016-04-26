@@ -1,5 +1,6 @@
 import pandas as pd
 import csv
+import os
 
 
 def maximum(list):
@@ -82,6 +83,8 @@ def normalize_output_binary(PM):
 
 
 def normalization(year):
+    if not os.path.exists("../Data/Normalised-Data/%i" % year):
+                os.makedirs("../Data/Normalised-Data/%i" % year)
     with open('../Data/Normalised-Data/met_normalised_'+str(year)+'.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(

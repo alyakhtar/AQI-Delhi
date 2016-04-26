@@ -1,6 +1,7 @@
 import csv
 import requests
 import sys
+import os
 from bs4 import BeautifulSoup
 import pandas as pd
 from Plot_Graph import data_2013, data_2014, data_2015, data_2016
@@ -57,6 +58,8 @@ def data_combine(year, cs):
 if __name__ == "__main__":
     for year in xrange(2013, 2017):
         final = []
+        if not os.path.exists("../Data/Original-Data/"):
+                os.makedirs("../Data/Original-Data/")
         with open('../Data/Original-Data/met_' + str(year) + '.csv', 'w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             wr.writerow(
