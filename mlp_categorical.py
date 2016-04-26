@@ -43,7 +43,7 @@ model.add(Activation('softmax'))
 sgd = SGD(lr=0.1, decay=1e-3, momentum=0.5, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd)
 
-model.fit(X, Y, nb_epoch=80, batch_size=1, show_accuracy=True)
+model.fit(X, Y, nb_epoch=20, batch_size=1, show_accuracy=True)
 score = model.evaluate(X2, Y3, batch_size=1)
 preds = model.predict(X2, batch_size=1, verbose=0)
 # print preds
@@ -68,35 +68,42 @@ G = pd.read_csv('Data/Original-Data/Original_Combine.csv', usecols=['VV'])
 H = pd.read_csv('Data/Original-Data/Original_Combine.csv', usecols=['VM'])
 I = pd.read_csv('Data/Original-Data/Original_Combine.csv', usecols=['V'])
 
+# a = pearsonr(A,B)
+# b = pearsonr(A,C)
+# c = pearsonr(A,D)
+# d = pearsonr(A,E)
+# e = pearsonr(A,F)
+# f = pearsonr(A,G)
+# g = pearsonr(A,H)
+# h = pearsonr(A,I)
 
-a = pearsonr(A,B)
-b = pearsonr(A,C)
-c = pearsonr(A,D)
-d = pearsonr(A,E)
-e = pearsonr(A,F)
-f = pearsonr(A,G)
-g = pearsonr(A,H)
-h = pearsonr(A,I)
+plt.plot(xrange(0, 1125), A, label='PM 2.5')
+plt.plot(xrange(0, 1125), E, label='SLP')
+plt.xlabel('DAYS')
+plt.ylabel('Feature')
+plt.legend(loc='upper right')
+plt.show()
 
-coerr = []
-coerr.append(a)
-coerr.append(b)
-coerr.append(c)
-coerr.append(d)
-coerr.append(e)
-coerr.append(f)
-coerr.append(g)
-coerr.append(h)
-myvar = 0
-mydoosravar = 0
-flag1 = -2
-flag2 = 2
-for i in coerr:
-    for j in i:
-        if j > flag1:
-            flag1 = j
-        if j < flag2:
-            flag2 = j
+# coerr = []
+# coerr.append(a)
+# coerr.append(b)
+# coerr.append(c)
+# coerr.append(d)
+# coerr.append(e)
+# coerr.append(f)
+# coerr.append(g)
+# coerr.append(h)
+# myvar = 0
+# mydoosravar = 0
+# flag1 = -2
+# flag2 = 2
+# for i in coerr:
+#     for j in i:
+#         if j > flag1:
+#             flag1 = j
+#         if j < flag2:
+#             flag2 = j
 
+# print coerr
 
-print "Max Poistive Correlation : ",flag1,"Max Negative Correlation : ",flag2
+# print "Max Poistive Correlation : ",flag1,"Max Negative Correlation : ",flag2
