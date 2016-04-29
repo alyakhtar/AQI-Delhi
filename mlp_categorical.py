@@ -12,7 +12,6 @@ from keras.utils import np_utils
 from scipy.stats.stats import pearsonr
 
 
-
 X = pd.read_csv('Data/Train/Train_Combine.csv', usecols=[
                 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM'])
 Y = pd.read_csv('Data/Train/Train_Combine.csv', usecols=['PM 2.5'])
@@ -68,42 +67,51 @@ G = pd.read_csv('Data/Original-Data/Original_Combine.csv', usecols=['VV'])
 H = pd.read_csv('Data/Original-Data/Original_Combine.csv', usecols=['VM'])
 I = pd.read_csv('Data/Original-Data/Original_Combine.csv', usecols=['V'])
 
-# a = pearsonr(A,B)
-# b = pearsonr(A,C)
-# c = pearsonr(A,D)
-# d = pearsonr(A,E)
-# e = pearsonr(A,F)
-# f = pearsonr(A,G)
-# g = pearsonr(A,H)
-# h = pearsonr(A,I)
+# Positive Correlation - PM 2.5 and Atmospheric pressure
+# plt.plot(xrange(0, 1125), A, label='PM 2.5')
+# plt.plot(xrange(0, 1125), E, label='Pressure')
+# plt.xlabel('DAYS')
+# plt.ylabel('Feature')
+# plt.legend(loc='upper right')
+# plt.show()
 
-plt.plot(xrange(0, 1125), A, label='PM 2.5')
-plt.plot(xrange(0, 1125), E, label='SLP')
-plt.xlabel('DAYS')
-plt.ylabel('Feature')
-plt.legend(loc='upper right')
-plt.show()
+# Negative Correlation - PM 2.5 and Minimun Temperature
+# plt.plot(xrange(0, 1125), A, label='PM 2.5')
+# plt.plot(xrange(0, 1125), D, label='Temprature')
+# plt.xlabel('DAYS')
+# plt.ylabel('Feature')
+# plt.legend(loc='upper right')
+# plt.show()
 
-# coerr = []
-# coerr.append(a)
-# coerr.append(b)
-# coerr.append(c)
-# coerr.append(d)
-# coerr.append(e)
-# coerr.append(f)
-# coerr.append(g)
-# coerr.append(h)
-# myvar = 0
-# mydoosravar = 0
-# flag1 = -2
-# flag2 = 2
-# for i in coerr:
-#     for j in i:
-#         if j > flag1:
-#             flag1 = j
-#         if j < flag2:
-#             flag2 = j
+a = pearsonr(A, B)
+b = pearsonr(A, C)
+c = pearsonr(A, D)
+d = pearsonr(A, E)
+e = pearsonr(A, F)
+f = pearsonr(A, G)
+g = pearsonr(A, H)
+h = pearsonr(A, I)
 
-# print coerr
+coerr = []
+coerr.append(a)
+coerr.append(b)
+coerr.append(c)
+coerr.append(d)
+coerr.append(e)
+coerr.append(f)
+coerr.append(g)
+coerr.append(h)
+myvar = 0
+mydoosravar = 0
+flag1 = -2
+flag2 = 2
+for i in coerr:
+    for j in i:
+        if j > flag1:
+            flag1 = j
+        if j < flag2:
+            flag2 = j
 
-# print "Max Poistive Correlation : ",flag1,"Max Negative Correlation : ",flag2
+print coerr
+
+print "Max Poistive Correlation : ", flag1, "Max Negative Correlation : ", flag2
