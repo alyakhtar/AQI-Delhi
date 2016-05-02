@@ -19,31 +19,19 @@ def confuse(Expected, Observed):
     A_O = []
     A_E = []
 
-    # for i in Observed:
-    #     if i >= -1.0 and i < -0.5:
-    #         A_O.append(0)
-    #     elif i >= -0.5 and i < 0:
-    #         A_O.append(1)
-    #     elif i >= 0 and i < 0.5:
-    #         A_O.append(2)
-    #     else:
-    #         A_O.append(3)
-
-    # for i in Expected:
-    #     if i >= -1.0 and i < -0.5:
-    #         A_E.append(0)
-    #     elif i >= -0.5 and i < 0:
-    #         A_E.append(1)
-    #     elif i >= 0 and i < 0.5:
-    #         A_E.append(2)
-    #     else:
-    #         A_E.append(3)
-
-    for i in Observed:
-        if i[0] > i[1]:
-            A_O.append(0)
-        else:
-            A_O.append(1)
+    if len(Observed[0]) == 2:
+        for i in Observed:
+            if i[0] > i[1]:
+                A_O.append(0)
+            else:
+                A_O.append(1)
+    else:
+        for i in Observed:
+            if i >= 0.5 and i < 1:
+                A_O.append(1)
+            else:
+                A_O.append(0)
+    
 
     print "Precision : ", precision_score(Expected,A_O, average=None)
     print "Recall : ", recall_score(Expected,A_O, average=None)
