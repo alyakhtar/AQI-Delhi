@@ -24,7 +24,7 @@
 
 ### Variation of PM 2.5 values over the last 3 years (Jan 2013 - Dec 2015)
 
-![ScreenShot](/graphs/all.png)
+![ScreenShot](/graphs/PM2.5for4Years.png)
 
 
 ### Data Sources
