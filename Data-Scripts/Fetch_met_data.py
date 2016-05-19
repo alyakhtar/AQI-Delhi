@@ -11,7 +11,7 @@ def fetch():
         for month in xrange(1, 13):
 
             if year == 2016:
-                if month < 4:
+                if month <= 4 :
                     url = 'http://en.tutiempo.net/climate/0%i-%i/ws-421820.html' % (
                         month, year)
                 else:

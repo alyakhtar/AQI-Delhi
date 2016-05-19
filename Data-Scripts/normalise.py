@@ -1,6 +1,5 @@
 import pandas as pd
-import csv
-import os
+import csv,os
 
 
 def maximum(list):
@@ -83,8 +82,6 @@ def normalize_output_binary(PM):
 
 
 def normalization(year):
-    if not os.path.exists("../Data/Normalised-Data/%i" % year):
-                os.makedirs("../Data/Normalised-Data/%i" % year)
     with open('../Data/Normalised-Data/met_normalised_'+str(year)+'.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
@@ -159,7 +156,7 @@ def normalization_combine():
     with open('../Data/Normalised-Data/met_normalised_combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
-            ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
+            ['T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
     final = []
     Temp = []
     T = []
@@ -207,7 +204,6 @@ def normalization_combine():
     TwoD = []
     for a in xrange(len(T)):
         oneD = []
-        oneD.append(a+1)
         oneD.append(T[a])
         oneD.append(TM[a])
         oneD.append(Tm[a])
@@ -226,6 +222,8 @@ def normalization_combine():
 
 
 if __name__ == "__main__":
+    if not os.path.exists("../Data/Normalised-Data"):
+        os.makedirs("../Data/Normalised-Data")
     for year in xrange(2013, 2017):
         normalization(year)
     normalization_combine()

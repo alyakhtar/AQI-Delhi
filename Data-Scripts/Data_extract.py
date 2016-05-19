@@ -1,14 +1,13 @@
-import csv
+import csv,os
 import requests
 import sys
-import os
 from bs4 import BeautifulSoup
 import pandas as pd
 from Plot_Graph import data_2013, data_2014, data_2015, data_2016
 
 
 def met_data(month, year):
-
+    
     file = open('../Data/Met-Data/%i/%i.html' % (year, month), 'rb')
     plain_text = file.read()
 
@@ -56,17 +55,17 @@ def data_combine(year, cs):
 
 
 if __name__ == "__main__":
+    if not os.path.exists("../Data/Original-Data"):
+        os.makedirs("../Data/Original-Data")
     for year in xrange(2013, 2017):
         final = []
-        if not os.path.exists("../Data/Original-Data/"):
-                os.makedirs("../Data/Original-Data/")
         with open('../Data/Original-Data/met_' + str(year) + '.csv', 'w') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
             wr.writerow(
-                ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
+                ['T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
         for month in xrange(1, 13):
             if year == 2016:
-                if month < 4:
+                if month < 5:
                     a = met_data(month, year)
                     final = final + a
                 else:
@@ -81,8 +80,8 @@ if __name__ == "__main__":
             pm.insert(364, '-')
 
         for i in xrange(len(final)):
-            final[i].insert(0, i + 1)
-            final[i].insert(9, pm[i])
+            # final[i].insert(0, i + 1)
+            final[i].insert(8, pm[i])
 
         with open('../Data/Original-Data/met_' + str(year) + '.csv', 'a') as csvfile:
             wr = csv.writer(csvfile, dialect='excel')
@@ -104,5 +103,5 @@ if __name__ == "__main__":
     with open('../Data/Original-Data/Original_Combine.csv', 'w') as csvfile:
         wr = csv.writer(csvfile, dialect='excel')
         wr.writerow(
-            ['SNO', 'T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
+            ['T', 'TM', 'Tm', 'SLP', 'H', 'VV', 'V', 'VM', 'PM 2.5'])
         wr.writerows(total)
